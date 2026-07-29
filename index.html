@@ -346,8 +346,7 @@
   <div class="container">
     <div class="eyebrow">Lo que dicen de nosotros</div>
     <h2 id="opiniones-title" class="section-title">Opiniones</h2>
-    <p class="section-sub">Aún no tenemos reseñas publicadas. ¡Sé el primero en compartir tu experiencia!</p>
-
+    <p class="section-sub" id="no-reviews-msg">Aún no tenemos reseñas publicadas. ¡Sé el primero en compartir tu experiencia!</p>
     <div id="reviews-container" class="testi-grid"></div>
 
     <div style="max-width:600px; margin:50px auto 0; text-align:center;">
@@ -496,19 +495,28 @@
     var reviewForm = document.getElementById('review-form');
 
     function renderReviews() {
-      var reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
-      reviewsContainer.innerHTML = '';
-      reviews.forEach(function(r) {
-        var stars = '★'.repeat(parseInt(r.stars)) + '☆'.repeat(5 - parseInt(r.stars));
-        var card = document.createElement('div');
-        card.className = 'testi-card';
-        card.innerHTML =
-          '<div class="testi-stars">' + stars + '</div>' +
-          '<p>"' + r.text + '"</p>' +
-          '<div class="testi-author"><div><b>' + r.name + '</b><span>' + r.service + '</span></div></div>';
-        reviewsContainer.appendChild(card);
-      });
-    }
+  var reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
+  var noReviewsMsg = document.getElementById('no-reviews-msg');
+
+  reviewsContainer.innerHTML = '';
+
+  if (reviews.length > 0) {
+    if (noReviewsMsg) noReviewsMsg.style.display = 'none';
+  } else {
+    if (noReviewsMsg) noReviewsMsg.style.display = 'block';
+  }
+
+  reviews.forEach(function(r) {
+    var stars = '★'.repeat(parseInt(r.stars)) + '☆'.repeat(5 - parseInt(r.stars));
+    var card = document.createElement('div');
+    card.className = 'testi-card';
+    card.innerHTML =
+      '<div class="testi-stars">' + stars + '</div>' +
+      '<p>"' + r.text + '"</p>' +
+      '<div class="testi-author"><div><b>' + r.name + '</b><span>' + r.service + '</span></div></div>';
+    reviewsContainer.appendChild(card);
+  });
+}
 
     if (showBtn && formWrap) {
       showBtn.addEventListener('click', function() {
