@@ -346,31 +346,27 @@
   <div class="container">
     <div class="eyebrow">Lo que dicen de nosotros</div>
     <h2 id="opiniones-title" class="section-title">Opiniones</h2>
-    <div class="testi-grid">
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <p>"Capturaron cada momento de nuestra boda de una forma tan natural que al ver las fotos volvimos a sentir todas las emociones del día."</p>
-        <div class="testi-author">
-          <div class="testi-avatar" data-src="Retrato sonriente de una mujer joven de pelo castaño ondulado, fondo neutro claro, estilo natural y cercano"></div>
-          <div><b>Laura &amp; Marc</b><span>Boda Premium, 2025</span></div>
-        </div>
-      </div>
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <p>"El Wedding Content fue lo mejor que hicimos. Al día siguiente ya teníamos reels increíbles para compartir con toda la familia."</p>
-        <div class="testi-author">
-          <div class="testi-avatar" data-src="Retrato sonriente de un hombre joven con barba corta, fondo neutro claro, estilo natural y cercano"></div>
-          <div><b>Sara &amp; Iván</b><span>Boda Full, 2025</span></div>
-        </div>
-      </div>
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <p>"Muy profesionales y cercanos desde el primer momento. Las fotos de la comunión de nuestra hija quedaron preciosas."</p>
-        <div class="testi-author">
-          <div class="testi-avatar" data-src="Retrato sonriente de una mujer de mediana edad con pelo corto, fondo neutro claro, estilo natural y cercano"></div>
-          <div><b>Familia Torres</b><span>Comunión, 2025</span></div>
-        </div>
-      </div>
+    <p class="section-sub">Aún no tenemos reseñas publicadas. ¡Sé el primero en compartir tu experiencia!</p>
+
+    <div id="reviews-container" class="testi-grid"></div>
+
+    <div style="max-width:600px; margin:50px auto 0; text-align:center;">
+      <button id="show-review-form" class="btn-primary" style="background:#0B1526; color:#fff;">Escribir una reseña</button>
+    </div>
+
+    <div id="review-form-wrap" style="max-width:600px; margin:30px auto 0; display:none;">
+      <form id="review-form" style="background:#fff; padding:30px; border-radius:6px; box-shadow:0 4px 20px rgba(0,0,0,.06); display:flex; flex-direction:column; gap:14px;">
+        <input type="text" id="review-name" placeholder="Tu nombre (ej. Laura & Marc)" required style="background:#F5F1EC; border:1px solid #ddd; color:#0B1526; padding:12px 14px; border-radius:4px; font-size:.9rem;">
+        <input type="text" id="review-service" placeholder="Servicio contratado (ej. Boda Premium, 2026)" style="background:#F5F1EC; border:1px solid #ddd; color:#0B1526; padding:12px 14px; border-radius:4px; font-size:.9rem;">
+        <select id="review-stars" required style="background:#F5F1EC; border:1px solid #ddd; color:#0B1526; padding:12px 14px; border-radius:4px; font-size:.9rem;">
+          <option value="">Valoración</option>
+          <option value="5">★★★★★ Excelente</option>
+          <option value="4">★★★★ Muy bueno</option>
+          <option value="3">★★★ Bueno</option>
+        </select>
+        <textarea id="review-text" placeholder="Cuéntanos tu experiencia..." required style="background:#F5F1EC; border:1px solid #ddd; color:#0B1526; padding:12px 14px; border-radius:4px; font-size:.9rem; min-height:100px; resize:vertical;"></textarea>
+        <button type="submit" class="btn-submit" style="background:#B39C86; color:#0B1526;">Publicar reseña</button>
+      </form>
     </div>
   </div>
 </section>
@@ -491,6 +487,54 @@
     });
   });
 </script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
 
+    var reviewsContainer = document.getElementById('reviews-container');
+    var showBtn = document.getElementById('show-review-form');
+    var formWrap = document.getElementById('review-form-wrap');
+    var reviewForm = document.getElementById('review-form');
+
+    function renderReviews() {
+      var reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
+      reviewsContainer.innerHTML = '';
+      reviews.forEach(function(r) {
+        var stars = '★'.repeat(parseInt(r.stars)) + '☆'.repeat(5 - parseInt(r.stars));
+        var card = document.createElement('div');
+        card.className = 'testi-card';
+        card.innerHTML =
+          '<div class="testi-stars">' + stars + '</div>' +
+          '<p>"' + r.text + '"</p>' +
+          '<div class="testi-author"><div><b>' + r.name + '</b><span>' + r.service + '</span></div></div>';
+        reviewsContainer.appendChild(card);
+      });
+    }
+
+    if (showBtn && formWrap) {
+      showBtn.addEventListener('click', function() {
+        formWrap.style.display = formWrap.style.display === 'none' ? 'block' : 'none';
+      });
+    }
+
+    if (reviewForm) {
+      reviewForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
+        reviews.unshift({
+          name: document.getElementById('review-name').value,
+          service: document.getElementById('review-service').value || 'Cliente',
+          stars: document.getElementById('review-stars').value,
+          text: document.getElementById('review-text').value
+        });
+        localStorage.setItem('reviews', JSON.stringify(reviews));
+        renderReviews();
+        reviewForm.reset();
+        formWrap.style.display = 'none';
+      });
+    }
+
+    renderReviews();
+  });
+</script>
 
 </body></html>
