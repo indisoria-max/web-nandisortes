@@ -1,6 +1,11 @@
-<html data-type="html" data-identifier="8f3e2a91-6c4d-4b1a-9e7f-2d5c8a91b3e6" data-title="Web Marca - Cliente Final" data-version="3" imagemodel="stable-diffusion" videomodel="none"><head>
+<html data-type="html" data-identifier="7f4a9c2e-3d81-4e56-b9a7-2c6f8e1d5b34" data-title="Testigo v3 - Logo Manuscrito" data-version="3" imagemodel="stable-diffusion" videomodel="none"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>testigo — Fotografía, Vídeo y Wedding Content</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Allura&amp;family=EB+Garamond:ital@0;1&amp;display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230B1526'/%3E%3Cg stroke='%23B8935F' stroke-width='7' stroke-linecap='round'%3E%3Cline x1='50' y1='18' x2='50' y2='82'/%3E%3Cline x1='30' y1='40' x2='70' y2='40'/%3E%3C/g%3E%3C/svg%3E">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   body { font-family:'Helvetica Neue', Arial, sans-serif; background:#FDFCFB; color:#0B1526; scroll-behavior:smooth; overflow-x:hidden; }
@@ -8,58 +13,29 @@
   a { text-decoration:none; }
   .container { max-width:1200px; margin:0 auto; padding:0 24px; }
 
-  /* NAV */
   header { position:fixed; top:0; left:0; width:100%; z-index:999; background:rgba(253,252,251,0.95); backdrop-filter:blur(6px); border-bottom:1px solid #eee; }
-  .navwrap { display:flex; justify-content:space-between; align-items:center; padding:18px 24px; max-width:1200px; margin:0 auto; position:relative; }
-  .brand { font-size:1.3rem; letter-spacing:2px; font-family:'Georgia',serif; color:#0B1526; }
+  .navwrap { display:flex; justify-content:space-between; align-items:center; padding:10px 24px; max-width:1200px; margin:0 auto; position:relative; }
+  .brand { display:flex; align-items:center; }
   nav#main-nav ul { display:flex; list-style:none; gap:28px; align-items:center; }
   nav#main-nav ul li a { color:#0B1526; font-size:.85rem; letter-spacing:.5px; text-transform:uppercase; }
-  nav#main-nav ul li a:hover { color:#B39C86; }
+  nav#main-nav ul li a:hover { color:#B8935F; }
   .nav-cta { background:#0B1526; color:#fff !important; padding:10px 22px; border-radius:2px; font-size:.8rem; text-transform:uppercase; letter-spacing:1px; }
-  .nav-cta:hover { background:#B39C86; }
+  .nav-cta:hover { background:#B8935F; }
 
-  /* MENU HAMBURGUESA MOVIL */
-  #menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    font-size: 1.9rem;
-    cursor: pointer;
-    color: #0B1526;
-    line-height: 1;
-    padding: 4px 8px;
-    z-index: 1001;
-  }
+  #menu-toggle { display:none; background:none; border:none; font-size:1.9rem; cursor:pointer; color:#0B1526; line-height:1; padding:4px 8px; z-index:1001; }
 
   @media(max-width:900px){
-    nav#main-nav {
-      display: none;
-    }
+    nav#main-nav { display:none; }
     nav#main-nav.open {
-      display: block !important;
-      position: fixed;
-      top: 68px;
-      left: 0;
-      width: 100%;
-      background: #FDFCFB;
-      border-bottom: 1px solid #eee;
-      box-shadow: 0 8px 20px rgba(0,0,0,.1);
-      z-index: 1000;
+      display:block !important; position:fixed; top:60px; left:0; width:100%;
+      background:#FDFCFB; border-bottom:1px solid #eee; box-shadow:0 8px 20px rgba(0,0,0,.1); z-index:1000;
     }
-    nav#main-nav.open ul {
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 24px 24px 30px;
-      gap: 20px;
-    }
+    nav#main-nav.open ul { flex-direction:column; align-items:flex-start; padding:24px 24px 30px; gap:20px; }
     nav#main-nav.open ul li { width:100%; }
     nav#main-nav.open ul li a { display:block; padding:6px 0; }
-    #menu-toggle {
-      display: block;
-    }
+    #menu-toggle { display:block; }
   }
 
-  /* HERO */
   .hero { min-height:100vh; display:flex; align-items:center; position:relative; background:#0B1526; overflow:hidden; }
   .hero-bg { position:absolute; inset:0; background-size:cover; background-position:center; opacity:.55; }
   .hero-overlay { position:absolute; inset:0; background:linear-gradient(180deg, rgba(11,21,38,.3) 0%, rgba(11,21,38,.8) 100%); }
@@ -75,14 +51,13 @@
   .scroll-hint { position:absolute; bottom:30px; left:50%; transform:translateX(-50%); color:#ccc; font-size:.75rem; letter-spacing:1px; z-index:2; }
 
   section { padding:110px 0; }
-  .eyebrow { color:#B39C86; letter-spacing:3px; font-size:.8rem; text-transform:uppercase; text-align:center; margin-bottom:14px; }
+  .eyebrow { color:#B8935F; letter-spacing:3px; font-size:.8rem; text-transform:uppercase; text-align:center; margin-bottom:14px; }
   .section-title { text-align:center; font-size:2.6rem; margin-bottom:16px; }
   .section-sub { text-align:center; color:#6E6E6E; max-width:560px; margin:0 auto 60px; font-size:1rem; }
   .dark-section { background:#0B1526; color:#fff; }
   .dark-section .section-sub { color:#ccc; }
   .cream-section { background:#F5F1EC; }
 
-  /* SERVICES */
   .services-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:#eee; }
   .service-card { background:#fff; padding:50px 40px; text-align:center; transition:.3s; }
   .service-card:hover { background:#0B1526; color:#fff; }
@@ -92,7 +67,6 @@
   .service-card:hover p { color:#ccc; }
   @media(max-width:850px){ .services-grid{ grid-template-columns:1fr; } }
 
-  /* WEDDING CONTENT */
   .wc-wrap { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
   .wc-img { width:100%; height:480px; background-size:cover; background-position:center; border-radius:4px; }
   .wc-tag { display:inline-block; background:#D4C5B9; color:#0B1526; padding:6px 16px; border-radius:20px; font-size:.75rem; letter-spacing:1px; text-transform:uppercase; margin-bottom:20px; font-weight:bold;}
@@ -100,7 +74,6 @@
   .wc-list span { background:#F5F1EC; padding:8px 16px; border-radius:20px; font-size:.8rem; color:#0B1526; }
   @media(max-width:850px){ .wc-wrap{ grid-template-columns:1fr; } .wc-img{height:320px;} }
 
-  /* GALLERY / PORTFOLIO */
   .gallery-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
   .gallery-item { height:280px; background-size:cover; background-position:center; border-radius:2px; position:relative; overflow:hidden; }
   .gallery-item.tall { grid-row: span 2; height:100%; }
@@ -108,7 +81,6 @@
   .gallery-item:hover:before { background:rgba(0,0,0,.15); }
   @media(max-width:850px){ .gallery-grid{ grid-template-columns:repeat(2,1fr); } .gallery-item.tall{grid-row:auto; height:280px;} }
 
-  /* PRICING */
   .pricing-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
   .price-card { border:1px solid #e5e0da; border-radius:4px; padding:40px 28px; text-align:center; background:#fff; position:relative; }
   .price-card.featured { border:2px solid #0B1526; transform:translateY(-10px); }
@@ -116,38 +88,32 @@
   .price-card h4 { font-size:1.2rem; margin-bottom:6px; text-transform:uppercase; letter-spacing:1px; }
   .price-amount { font-size:2.4rem; margin:16px 0; font-family:'Georgia',serif; }
   .price-card ul { list-style:none; margin-top:20px; text-align:left; color:#6E6E6E; font-size:.88rem; line-height:2; }
-  .price-card ul li:before { content:'— '; color:#B39C86; }
+  .price-card ul li:before { content:'— '; color:#B8935F; }
   .price-card .btn-primary { background:#0B1526; color:#fff; margin-top:24px; width:100%; padding:14px; font-size:.8rem; }
-  .price-card.featured .btn-primary { background:#B39C86; color:#0B1526; }
+  .price-card.featured .btn-primary { background:#B8935F; color:#0B1526; }
   @media(max-width:900px){ .pricing-grid{ grid-template-columns:1fr 1fr; } .price-card.featured{ transform:none; } }
   @media(max-width:550px){ .pricing-grid{ grid-template-columns:1fr; } }
   .pricing-note { text-align:center; margin-top:40px; color:#999; font-size:.85rem; font-style:italic; }
 
-  /* PROCESS */
   .process-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:20px; }
   .process-step { text-align:center; }
-  .process-num { width:56px; height:56px; border-radius:50%; border:1px solid #B39C86; display:flex; align-items:center; justify-content:center; margin:0 auto 20px; font-family:'Georgia',serif; font-size:1.1rem; color:#B39C86; }
+  .process-num { width:56px; height:56px; border-radius:50%; border:1px solid #B8935F; display:flex; align-items:center; justify-content:center; margin:0 auto 20px; font-family:'Georgia',serif; font-size:1.1rem; color:#B8935F; }
   .process-step h4 { font-size:1rem; margin-bottom:8px; }
   .process-step p { color:#ccc; font-size:.82rem; }
   @media(max-width:900px){ .process-grid{ grid-template-columns:repeat(2,1fr); gap:40px; } }
 
-  /* TESTIMONIALS */
   .testi-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:30px; }
   .testi-card { background:#fff; padding:36px 30px; border-radius:4px; box-shadow:0 4px 20px rgba(0,0,0,.04); }
-  .testi-stars { color:#B39C86; margin-bottom:16px; font-size:1rem; }
+  .testi-stars { color:#B8935F; margin-bottom:16px; font-size:1rem; }
   .testi-card p { color:#555; font-size:.92rem; line-height:1.7; font-style:italic; margin-bottom:20px; }
-  .testi-author { display:flex; align-items:center; gap:12px; }
-  .testi-avatar { width:44px; height:44px; border-radius:50%; background-size:cover; background-position:center; flex-shrink:0; }
   .testi-author b { font-size:.88rem; display:block; }
   .testi-author span { font-size:.75rem; color:#999; }
   @media(max-width:850px){ .testi-grid{ grid-template-columns:1fr; } }
 
-  /* INSTAGRAM STRIP */
   .insta-strip { display:grid; grid-template-columns:repeat(6,1fr); gap:2px; }
   .insta-item { height:160px; background-size:cover; background-position:center; }
   @media(max-width:850px){ .insta-strip{ grid-template-columns:repeat(3,1fr); } }
 
-  /* CONTACT */
   .contact-wrap { display:grid; grid-template-columns:1fr 1fr; gap:60px; }
   .contact-info h3 { font-size:1.4rem; margin-bottom:20px; }
   .contact-info p { color:#ccc; font-size:.92rem; line-height:1.7; margin-bottom:30px; }
@@ -157,28 +123,26 @@
   .contact-item span { color:#ccc; font-size:.85rem; }
   .social-row { display:flex; gap:14px; margin-top:30px; }
   .social-row a { width:40px; height:40px; border:1px solid #555; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff !important; font-size:1rem; }
-  .social-row a:hover { background:#B39C86; border-color:#B39C86; }
+  .social-row a:hover { background:#B8935F; border-color:#B8935F; }
 
   form { display:flex; flex-direction:column; gap:16px; }
   .form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
   input, select, textarea { background:#1B2A42; border:1px solid #354862; color:#fff; padding:14px 16px; font-size:.9rem; border-radius:2px; font-family:Arial,sans-serif; width:100%; }
   input::placeholder, textarea::placeholder { color:#8a97ab; }
-  input:focus, select:focus, textarea:focus { outline:none; border-color:#B39C86; }
+  input:focus, select:focus, textarea:focus { outline:none; border-color:#B8935F; }
   textarea { resize:vertical; min-height:110px; }
-  .btn-submit { background:#B39C86; color:#0B1526; padding:16px; font-size:.85rem; letter-spacing:1.5px; text-transform:uppercase; border:none; border-radius:2px; cursor:pointer; font-weight:bold; }
+  .btn-submit { background:#B8935F; color:#0B1526; padding:16px; font-size:.85rem; letter-spacing:1.5px; text-transform:uppercase; border:none; border-radius:2px; cursor:pointer; font-weight:bold; }
   .btn-submit:hover { background:#fff; }
-  .form-msg { font-size:.85rem; color:#B39C86; margin-top:6px; display:none; }
+  .form-msg { font-size:.85rem; color:#B8935F; margin-top:6px; display:none; }
   @media(max-width:850px){ .contact-wrap{ grid-template-columns:1fr; } .form-row{grid-template-columns:1fr;} }
 
-  /* FOOTER */
   footer { background:#060B14; color:#888; padding:50px 0 24px; text-align:center; font-size:.8rem; }
-  footer .brand { color:#fff; margin-bottom:16px; }
   footer .fnav { display:flex; justify-content:center; gap:24px; margin-bottom:24px; flex-wrap:wrap; }
   footer .fnav a { color:#aaa; font-size:.8rem; }
-  footer .fnav a:hover { color:#B39C86; }
+  footer .fnav a:hover { color:#B8935F; }
   .fline { border-top:1px solid #1a2635; margin-top:24px; padding-top:20px; }
 
-  ::-webkit-scrollbar{width:8px;} ::-webkit-scrollbar-thumb{background:#B39C86;}
+  ::-webkit-scrollbar{width:8px;} ::-webkit-scrollbar-thumb{background:#B8935F;}
 
   @media (max-width: 600px) {
     .hero h1 { font-size: 2.4rem; }
@@ -196,7 +160,19 @@
 
 <header>
   <div class="navwrap">
-    <div class="brand">[NOMBRE DE LA MARCA]</div>
+    <div class="brand">
+      <svg width="150" height="52" viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg">
+        <text x="4" y="158" font-family="'Allura', cursive" font-size="140" fill="#0B1526">tes</text>
+        <g fill="none" stroke="#0B1526" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M126,150 Q142,158 156,154"></path>
+          <path d="M156,154 C158,128 161,90 165,46"></path>
+          <path d="M165,46 Q172,40 178,45"></path>
+          <path d="M141,96 Q160,88 186,95"></path>
+          <path d="M156,154 Q170,163 190,160"></path>
+        </g>
+        <text x="196" y="158" font-family="'Allura', cursive" font-size="140" fill="#0B1526">igo</text>
+      </svg>
+    </div>
     <nav id="main-nav">
       <ul>
         <li><a href="#servicios">Servicios</a></li>
@@ -212,7 +188,6 @@
   </div>
 </header>
 
-<!-- HERO -->
 <section class="hero" id="hero">
   <div class="hero-bg" data-src="Fotografía cinematográfica de una pareja de recién casados abrazándose al atardecer en un jardín con luces cálidas doradas, ella con vestido blanco vaporoso, él con traje oscuro, composición amplia, estilo editorial romántico y elegante, tonos cálidos y cinematográficos"></div>
   <div class="hero-overlay"></div>
@@ -228,11 +203,10 @@
   <div class="scroll-hint">↓ DESCUBRE MÁS</div>
 </section>
 
-<!-- SERVICIOS -->
 <section id="servicios" class="cream-section">
   <div class="container">
     <div class="eyebrow">Qué hacemos</div>
-    <h2 id="servicios-title" class="section-title">Nuestros servicios</h2>
+    <h2 class="section-title">Nuestros servicios</h2>
     <p class="section-sub">Especialistas en fotografía social y eventos familiares, con un enfoque cercano y una estética atemporal.</p>
   </div>
   <div class="services-grid">
@@ -245,14 +219,13 @@
   </div>
 </section>
 
-<!-- WEDDING CONTENT -->
 <section id="wedding-content">
   <div class="container">
     <div class="wc-wrap">
       <div class="wc-img" data-src="Fotografía vertical estilo smartphone de una novia riendo mientras sus amigas la ayudan a arreglarse el vestido, ambiente luminoso y natural, luz de ventana suave, estética auténtica de redes sociales, colores cálidos y naturales"></div>
       <div>
         <div class="wc-tag">Servicio diferenciador</div>
-        <h2 id="wc-title" style="font-size:2.2rem; margin-bottom:20px;">¿Qué es el Wedding Content?</h2>
+        <h2 style="font-size:2.2rem; margin-bottom:20px;">¿Qué es el Wedding Content?</h2>
         <p style="color:#6E6E6E; line-height:1.8; margin-bottom:20px;">
           Mientras el fotógrafo capta los recuerdos y el videógrafo narra la película de vuestra boda, nosotros creamos <b>contenido rápido y auténtico</b>, pensado para compartir en redes sociales al día siguiente de la celebración.
         </p>
@@ -266,11 +239,10 @@
   </div>
 </section>
 
-<!-- PORTFOLIO -->
 <section id="portfolio" class="cream-section">
   <div class="container">
     <div class="eyebrow">Nuestro trabajo</div>
-    <h2 id="portfolio-title" class="section-title">Portfolio</h2>
+    <h2 class="section-title">Portfolio</h2>
     <p class="section-sub">Una selección de nuestras sesiones y celebraciones favoritas.</p>
     <div class="gallery-grid">
       <div class="gallery-item tall" data-src="Fotografía vertical de una novia sosteniendo un ramo de flores silvestres frente a una iglesia de piedra antigua, luz natural suave, estilo editorial romántico"></div>
@@ -288,11 +260,10 @@
   </div>
 </section>
 
-<!-- PRECIOS -->
 <section id="precios">
   <div class="container">
     <div class="eyebrow">Inversión</div>
-    <h2 id="precios-title" class="section-title">Packs de boda</h2>
+    <h2 class="section-title">Packs de boda</h2>
     <p class="section-sub">Cada pareja es diferente, por eso ofrecemos distintos niveles de cobertura adaptados a vuestra celebración.</p>
     <div class="pricing-grid">
       <div class="price-card">
@@ -325,11 +296,10 @@
   </div>
 </section>
 
-<!-- PROCESO -->
 <section id="proceso" class="dark-section">
   <div class="container">
     <div class="eyebrow">Cómo trabajamos</div>
-    <h2 id="proceso-title" class="section-title">Un proceso sencillo y cercano</h2>
+    <h2 class="section-title">Un proceso sencillo y cercano</h2>
     <p class="section-sub">De la primera conversación a vuestros recuerdos en las manos.</p>
     <div class="process-grid">
       <div class="process-step"><div class="process-num">1</div><h4>Contacto</h4><p>Nos escribís y conocemos vuestra historia.</p></div>
@@ -341,36 +311,35 @@
   </div>
 </section>
 
-<!-- TESTIMONIOS -->
 <section id="opiniones" class="cream-section">
   <div class="container">
     <div class="eyebrow">Lo que dicen de nosotros</div>
-    <h2 id="opiniones-title" class="section-title">Opiniones</h2>
+    <h2 class="section-title">Opiniones</h2>
     <p class="section-sub" id="no-reviews-msg">Aún no tenemos reseñas publicadas. ¡Sé el primero en compartir tu experiencia!</p>
+
     <div id="reviews-container" class="testi-grid"></div>
 
     <div style="max-width:600px; margin:50px auto 0; text-align:center;">
-      <button id="show-review-form" class="btn-primary" style="background:#0B1526; color:#fff;">Escribir una reseña</button>
+      <button id="show-review-form" type="button" class="btn-primary" style="background:#0B1526; color:#fff; border:none; cursor:pointer;">Escribir una reseña</button>
     </div>
 
     <div id="review-form-wrap" style="max-width:600px; margin:30px auto 0; display:none;">
       <form id="review-form" style="background:#fff; padding:30px; border-radius:6px; box-shadow:0 4px 20px rgba(0,0,0,.06); display:flex; flex-direction:column; gap:14px;">
-        <input type="text" id="review-name" placeholder="Tu nombre (ej. Laura & Marc)" required style="background:#F5F1EC; border:1px solid #ddd; color:#0B1526; padding:12px 14px; border-radius:4px; font-size:.9rem;">
+        <input type="text" id="review-name" placeholder="Tu nombre (ej. Laura &amp; Marc)" required="" style="background:#F5F1EC; border:1px solid #ddd; color:#0B1526; padding:12px 14px; border-radius:4px; font-size:.9rem;">
         <input type="text" id="review-service" placeholder="Servicio contratado (ej. Boda Premium, 2026)" style="background:#F5F1EC; border:1px solid #ddd; color:#0B1526; padding:12px 14px; border-radius:4px; font-size:.9rem;">
-        <select id="review-stars" required style="background:#F5F1EC; border:1px solid #ddd; color:#0B1526; padding:12px 14px; border-radius:4px; font-size:.9rem;">
+        <select id="review-stars" required="" style="background:#F5F1EC; border:1px solid #ddd; color:#0B1526; padding:12px 14px; border-radius:4px; font-size:.9rem;">
           <option value="">Valoración</option>
           <option value="5">★★★★★ Excelente</option>
           <option value="4">★★★★ Muy bueno</option>
           <option value="3">★★★ Bueno</option>
         </select>
-        <textarea id="review-text" placeholder="Cuéntanos tu experiencia..." required style="background:#F5F1EC; border:1px solid #ddd; color:#0B1526; padding:12px 14px; border-radius:4px; font-size:.9rem; min-height:100px; resize:vertical;"></textarea>
-        <button type="submit" class="btn-submit" style="background:#B39C86; color:#0B1526;">Publicar reseña</button>
+        <textarea id="review-text" placeholder="Cuéntanos tu experiencia..." required="" style="background:#F5F1EC; border:1px solid #ddd; color:#0B1526; padding:12px 14px; border-radius:4px; font-size:.9rem; min-height:100px; resize:vertical;"></textarea>
+        <button type="submit" class="btn-submit" style="background:#B8935F; color:#0B1526;">Publicar reseña</button>
       </form>
     </div>
   </div>
 </section>
 
-<!-- INSTAGRAM STRIP -->
 <section style="padding:0;">
   <div class="insta-strip">
     <div class="insta-item" data-src="Fotografía cuadrada de detalle de anillos de boda sobre una superficie de madera con flores secas, luz natural suave"></div>
@@ -382,15 +351,14 @@
   </div>
 </section>
 
-<!-- CONTACTO -->
 <section id="contacto" class="dark-section">
   <div class="container">
     <div class="contact-wrap">
       <div class="contact-info">
         <div class="eyebrow" style="text-align:left;">Hablemos</div>
-        <h3 id="contacto-title">¿Listos para contarnos vuestra historia?</h3>
+        <h3>¿Listos para contarnos vuestra historia?</h3>
         <p>Escribidnos y os responderemos en menos de 24 horas con disponibilidad y presupuesto personalizado.</p>
-        <div class="contact-item"><span class="icon">📧</span><div><b>Email</b><span>hola@[nombredemarca].com</span></div></div>
+        <div class="contact-item"><span class="icon">📧</span><div><b>Email</b><span>hola@testigoestudio.com</span></div></div>
         <div class="contact-item"><span class="icon">📱</span><div><b>WhatsApp / Teléfono</b><span>+34 000 00 00 00</span></div></div>
         <div class="contact-item"><span class="icon">📍</span><div><b>Zona de trabajo</b><span>Disponibles para desplazamientos</span></div></div>
         <div class="social-row">
@@ -430,14 +398,26 @@
 
 <footer>
   <div class="container">
-    <div class="brand" style="font-size:1.2rem;">[NOMBRE DE LA MARCA]</div>
+    <div class="brand" style="justify-content:center; display:flex; margin-bottom:16px;">
+      <svg width="180" height="62" viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg">
+        <text x="4" y="158" font-family="'Allura', cursive" font-size="140" fill="#C9A876">tes</text>
+        <g fill="none" stroke="#C9A876" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M126,150 Q142,158 156,154"></path>
+          <path d="M156,154 C158,128 161,90 165,46"></path>
+          <path d="M165,46 Q172,40 178,45"></path>
+          <path d="M141,96 Q160,88 186,95"></path>
+          <path d="M156,154 Q170,163 190,160"></path>
+        </g>
+        <text x="196" y="158" font-family="'Allura', cursive" font-size="140" fill="#C9A876">igo</text>
+      </svg>
+    </div>
     <div class="fnav">
       <a href="#servicios">Servicios</a>
       <a href="#portfolio">Portfolio</a>
       <a href="#precios">Precios</a>
       <a href="#contacto">Contacto</a>
     </div>
-    <div class="fline">© 2026 [Nombre de la marca]. Todos los derechos reservados.</div>
+    <div class="fline">© 2026 testigo. Todos los derechos reservados.</div>
   </div>
 </footer>
 
@@ -486,6 +466,7 @@
     });
   });
 </script>
+
 <script>
   document.addEventListener('DOMContentLoaded', function() {
 
@@ -495,28 +476,28 @@
     var reviewForm = document.getElementById('review-form');
 
     function renderReviews() {
-  var reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
-  var noReviewsMsg = document.getElementById('no-reviews-msg');
+      var reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
+      var noReviewsMsg = document.getElementById('no-reviews-msg');
 
-  reviewsContainer.innerHTML = '';
+      reviewsContainer.innerHTML = '';
 
-  if (reviews.length > 0) {
-    if (noReviewsMsg) noReviewsMsg.style.display = 'none';
-  } else {
-    if (noReviewsMsg) noReviewsMsg.style.display = 'block';
-  }
+      if (reviews.length > 0) {
+        if (noReviewsMsg) noReviewsMsg.style.display = 'none';
+      } else {
+        if (noReviewsMsg) noReviewsMsg.style.display = 'block';
+      }
 
-  reviews.forEach(function(r) {
-    var stars = '★'.repeat(parseInt(r.stars)) + '☆'.repeat(5 - parseInt(r.stars));
-    var card = document.createElement('div');
-    card.className = 'testi-card';
-    card.innerHTML =
-      '<div class="testi-stars">' + stars + '</div>' +
-      '<p>"' + r.text + '"</p>' +
-      '<div class="testi-author"><div><b>' + r.name + '</b><span>' + r.service + '</span></div></div>';
-    reviewsContainer.appendChild(card);
-  });
-}
+      reviews.forEach(function(r) {
+        var stars = '★'.repeat(parseInt(r.stars)) + '☆'.repeat(5 - parseInt(r.stars));
+        var card = document.createElement('div');
+        card.className = 'testi-card';
+        card.innerHTML =
+          '<div class="testi-stars">' + stars + '</div>' +
+          '<p>"' + r.text + '"</p>' +
+          '<div class="testi-author"><div><b>' + r.name + '</b><span>' + r.service + '</span></div></div>';
+        reviewsContainer.appendChild(card);
+      });
+    }
 
     if (showBtn && formWrap) {
       showBtn.addEventListener('click', function() {
@@ -544,5 +525,6 @@
     renderReviews();
   });
 </script>
+
 
 </body></html>
