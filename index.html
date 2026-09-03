@@ -1,4 +1,4 @@
-<html lang="es">
+<html data-type="html" data-identifier="f4a92b71-3c58-4e89-b6d3-8e1f5a2c9d47" data-title="Testigo - Web Completa Final" data-version="1" imagemodel="stable-diffusion" videomodel="none">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,40 +24,23 @@
   nav#main-nav ul li a:hover { color:#B8935F; }
   .nav-cta { background:#0B1526; color:#fff !important; padding:10px 22px; border-radius:2px; font-size:.8rem; text-transform:uppercase; letter-spacing:1px; }
   .nav-cta:hover { background:#B8935F; }
-
   #menu-toggle { display:none; background:none; border:none; font-size:1.9rem; cursor:pointer; color:#0B1526; line-height:1; padding:4px 8px; z-index:1001; }
-
   @media(max-width:900px){
     nav#main-nav { display:none; }
-    nav#main-nav.open {
-      display:block !important; position:fixed; top:60px; left:0; width:100%;
-      background:#FDFCFB; border-bottom:1px solid #eee; box-shadow:0 8px 20px rgba(0,0,0,.1); z-index:1000;
-    }
+    nav#main-nav.open { display:block !important; position:fixed; top:60px; left:0; width:100%; background:#FDFCFB; border-bottom:1px solid #eee; box-shadow:0 8px 20px rgba(0,0,0,.1); z-index:1000; }
     nav#main-nav.open ul { flex-direction:column; align-items:flex-start; padding:24px 24px 30px; gap:20px; }
     nav#main-nav.open ul li { width:100%; }
     nav#main-nav.open ul li a { display:block; padding:6px 0; }
     #menu-toggle { display:block; }
   }
 
-  /* HERO — foto de boda de fondo */
-  .hero {
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    position:relative;
-    background:#0B1526;
-    overflow:hidden;
-  }
+  .hero { min-height:100vh; display:flex; align-items:center; position:relative; background:#0B1526; overflow:hidden; }
   .hero-bg {
-    position:absolute;
-    inset:0;
-    background-size:cover;
-    background-position:center;
-    background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&q=80');
-    /* CAMBIA esta URL por la ruta de tu propia foto cuando la tengas: url('foto-boda.jpg') */
+    position:absolute; inset:0; background-size:cover; background-position:center;
+    background-image:url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1920&q=80');
     opacity:.65;
   }
-  .hero-overlay { position:absolute; inset:0; background:linear-gradient(180deg, rgba(11,21,38,.25) 0%, rgba(11,21,38,.72) 100%); }
+  .hero-overlay { position:absolute; inset:0; background:linear-gradient(180deg, rgba(11,21,38,.25) 0%, rgba(11,21,38,.75) 100%); }
   .hero-content { position:relative; z-index:2; text-align:center; width:100%; padding:0 24px; }
   .hero-eyebrow { color:#D4C5B9; letter-spacing:4px; font-size:.8rem; text-transform:uppercase; margin-bottom:20px; }
   .hero h1 { color:#fff; font-size:4.2rem; line-height:1.1; margin-bottom:20px; }
@@ -77,10 +60,12 @@
   .dark-section .section-sub { color:#ccc; }
   .cream-section { background:#F5F1EC; }
 
+  /* SERVICIOS — iconos SVG */
   .services-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:#eee; }
   .service-card { background:#fff; padding:50px 40px; text-align:center; transition:.3s; }
   .service-card:hover { background:#0B1526; color:#fff; }
-  .service-icon { font-size:2.2rem; margin-bottom:20px; display:block; }
+  .service-icon { width:50px; height:50px; margin:0 auto 22px; display:block; color:#B8935F; transition:color .3s; }
+  .service-card:hover .service-icon { color:#fff; }
   .service-card h3 { font-size:1.3rem; margin-bottom:12px; }
   .service-card p { color:#6E6E6E; font-size:.9rem; line-height:1.6; }
   .service-card:hover p { color:#ccc; }
@@ -95,7 +80,7 @@
 
   .gallery-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
   .gallery-item { height:280px; background-size:cover; background-position:center; border-radius:2px; position:relative; overflow:hidden; }
-  .gallery-item.tall { grid-row: span 2; height:100%; }
+  .gallery-item.tall { grid-row:span 2; height:100%; }
   .gallery-item:before { content:''; position:absolute; inset:0; background:rgba(0,0,0,0); transition:.3s; }
   .gallery-item:hover:before { background:rgba(0,0,0,.15); }
   @media(max-width:850px){ .gallery-grid{ grid-template-columns:repeat(2,1fr); } .gallery-item.tall{grid-row:auto; height:280px;} }
@@ -161,7 +146,6 @@
   footer .fnav a { color:#aaa; font-size:.8rem; }
   footer .fnav a:hover { color:#B8935F; }
   .fline { border-top:1px solid #1a2635; margin-top:24px; padding-top:20px; }
-
   ::-webkit-scrollbar{width:8px;} ::-webkit-scrollbar-thumb{background:#B8935F;}
 
   @media (max-width: 600px) {
@@ -214,6 +198,7 @@
   <div class="scroll-hint">↓ DESCUBRE MÁS</div>
 </section>
 
+<!-- SERVICIOS CON ICONOS SVG PROFESIONALES -->
 <section id="servicios" class="cream-section">
   <div class="container">
     <div class="eyebrow">Qué hacemos</div>
@@ -221,19 +206,75 @@
     <p class="section-sub">Especialistas en fotografía social y eventos familiares, con un enfoque cercano y una estética atemporal.</p>
   </div>
   <div class="services-grid">
-    <div class="service-card"><span class="service-icon">📸</span><h3>Retratos</h3><p>Sesiones individuales o en grupo, en estudio o exterior, con una dirección natural y relajada.</p></div>
-    <div class="service-card"><span class="service-icon">❤️</span><h3>Parejas</h3><p>Sesiones que capturan la complicidad y la conexión real entre dos personas.</p></div>
-    <div class="service-card"><span class="service-icon">💍</span><h3>Bodas</h3><p>Cobertura completa de vuestro gran día, desde los preparativos hasta la última canción.</p></div>
-    <div class="service-card"><span class="service-icon">⛪</span><h3>Bautizos</h3><p>Momentos íntimos y emotivos, documentados con delicadeza y cercanía.</p></div>
-    <div class="service-card"><span class="service-icon">🎓</span><h3>Comuniones</h3><p>Un día especial merece un recuerdo especial, cuidado en cada detalle.</p></div>
-    <div class="service-card"><span class="service-icon">📱</span><h3>Wedding Content</h3><p>Contenido vertical y auténtico para que revivas tu boda en redes sociales al instante.</p></div>
+
+    <div class="service-card">
+      <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+      <h3>Retratos</h3>
+      <p>Sesiones individuales o en grupo, en estudio o exterior, con una dirección natural y relajada.</p>
+    </div>
+
+    <div class="service-card">
+      <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+      </svg>
+      <h3>Parejas</h3>
+      <p>Sesiones que capturan la complicidad y la conexión real entre dos personas.</p>
+    </div>
+
+    <div class="service-card">
+      <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <circle cx="13" cy="12" r="8"/>
+        <circle cx="27" cy="12" r="8"/>
+      </svg>
+      <h3>Bodas</h3>
+      <p>Cobertura completa de vuestro gran día, desde los preparativos hasta la última canción.</p>
+    </div>
+
+    <div class="service-card">
+      <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2C6.5 8.5 4 13.5 4 17a8 8 0 0 0 16 0c0-3.5-2.5-8.5-8-15z"/>
+        <line x1="12" y1="11" x2="12" y2="18"/>
+        <line x1="9" y1="14.5" x2="15" y2="14.5"/>
+      </svg>
+      <h3>Bautizos</h3>
+      <p>Momentos íntimos y emotivos, documentados con delicadeza y cercanía.</p>
+    </div>
+
+    <div class="service-card">
+      <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M7 3h10"/>
+        <path d="M8 3c0 3.5-1 6.5-1 9a5 5 0 0 0 10 0c0-2.5-1-5.5-1-9"/>
+        <line x1="12" y1="17" x2="12" y2="21"/>
+        <line x1="8.5" y1="21" x2="15.5" y2="21"/>
+      </svg>
+      <h3>Comuniones</h3>
+      <p>Un día especial merece un recuerdo especial, cuidado en cada detalle.</p>
+    </div>
+
+    <div class="service-card">
+      <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+        <circle cx="12" cy="18.5" r="0.8" fill="currentColor" stroke="none"/>
+        <polyline points="10,8.5 15.5,12 10,15.5"/>
+      </svg>
+      <h3>Wedding Content</h3>
+      <p>Contenido vertical y auténtico para que revivas tu boda en redes sociales al instante.</p>
+    </div>
+
   </div>
 </section>
 
+<!-- WEDDING CONTENT CON FOTO REAL A LA IZQUIERDA -->
 <section id="wedding-content">
   <div class="container">
     <div class="wc-wrap">
-      <div class="wc-img" data-src="Fotografía vertical estilo smartphone de una novia riendo mientras sus amigas la ayudan a arreglarse el vestido, ambiente luminoso y natural, luz de ventana suave, estética auténtica de redes sociales, colores cálidos y naturales"></div>
+      <div class="wc-img" style="background-image:url('https://images.unsplash.com/photo-1520245840179-a7d310e02cb6?auto=format&fit=crop&w=800&q=80');"></div>
       <div>
         <div class="wc-tag">Servicio diferenciador</div>
         <h2 style="font-size:2.2rem; margin-bottom:20px;">¿Qué es el Wedding Content?</h2>
@@ -250,20 +291,21 @@
   </div>
 </section>
 
+<!-- PORTFOLIO CON FOTOS REALES DE BODAS -->
 <section id="portfolio" class="cream-section">
   <div class="container">
     <div class="eyebrow">Nuestro trabajo</div>
     <h2 class="section-title">Portfolio</h2>
     <p class="section-sub">Una selección de nuestras sesiones y celebraciones favoritas.</p>
     <div class="gallery-grid">
-      <div class="gallery-item tall" data-src="Fotografía vertical de una novia sosteniendo un ramo de flores silvestres frente a una iglesia de piedra antigua, luz natural suave, estilo editorial romántico"></div>
-      <div class="gallery-item" data-src="Fotografía de una pareja bailando su primer baile en una carpa decorada con luces cálidas, ambiente festivo nocturno, estilo cinematográfico"></div>
-      <div class="gallery-item" data-src="Retrato en blanco y negro de un hombre de mediana edad con traje elegante mirando a cámara con expresión serena, fondo neutro desenfocado, estilo editorial clásico"></div>
-      <div class="gallery-item" data-src="Fotografía de detalles de mesa de boda con vajilla elegante, velas y flores en tonos crema y verde salvia, luz natural cálida, estilo fine art"></div>
-      <div class="gallery-item" data-src="Fotografía de una niña pequeña con vestido de comunión blanco sonriendo junto a su familia en un jardín soleado, tonos suaves y luminosos"></div>
-      <div class="gallery-item" data-src="Fotografía de una pareja joven abrazándose riendo en una calle empedrada de un pueblo mediterráneo al atardecer, estilo lifestyle auténtico"></div>
-      <div class="gallery-item" data-src="Fotografía de un bebé durante su bautizo siendo sostenido con ternura, luz suave de interior de iglesia, tonos cálidos e íntimos"></div>
-      <div class="gallery-item" data-src="Fotografía aérea de una recepción de boda al aire libre con mesas redondas decoradas, jardín verde y luces colgantes, atardecer dorado"></div>
+      <div class="gallery-item tall" style="background-image:url('https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=600&q=80'); background-position:center top;"></div>
+      <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80');"></div>
+      <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1529519195486-16945f0fb37f?auto=format&fit=crop&w=800&q=80');"></div>
+      <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1503315082045-a2bfb5e7f56e?auto=format&fit=crop&w=800&q=80');"></div>
+      <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80');"></div>
+      <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1520245840179-a7d310e02cb6?auto=format&fit=crop&w=800&q=80');"></div>
+      <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1508407576665-2d9a5d638a7e?auto=format&fit=crop&w=800&q=80');"></div>
+      
     </div>
     <div style="text-align:center; margin-top:50px;">
       <a href="#contacto" class="btn-primary" style="background:#0B1526; color:#fff;">Ver más trabajos</a>
@@ -327,13 +369,10 @@
     <div class="eyebrow">Lo que dicen de nosotros</div>
     <h2 class="section-title">Opiniones</h2>
     <p class="section-sub" id="no-reviews-msg">Aún no tenemos reseñas publicadas. ¡Sé el primero en compartir tu experiencia!</p>
-
     <div id="reviews-container" class="testi-grid"></div>
-
     <div style="max-width:600px; margin:50px auto 0; text-align:center;">
       <button id="show-review-form" type="button" class="btn-primary" style="background:#0B1526; color:#fff; border:none; cursor:pointer;">Escribir una reseña</button>
     </div>
-
     <div id="review-form-wrap" style="max-width:600px; margin:30px auto 0; display:none;">
       <form id="review-form" style="background:#fff; padding:30px; border-radius:6px; box-shadow:0 4px 20px rgba(0,0,0,.06); display:flex; flex-direction:column; gap:14px;">
         <input type="text" id="review-name" placeholder="Tu nombre (ej. Laura & Marc)" required style="background:#F5F1EC; border:1px solid #ddd; color:#0B1526; padding:12px 14px; border-radius:4px; font-size:.9rem;">
@@ -353,12 +392,12 @@
 
 <section style="padding:0;">
   <div class="insta-strip">
-    <div class="insta-item" data-src="Fotografía cuadrada de detalle de anillos de boda sobre una superficie de madera con flores secas, luz natural suave"></div>
-    <div class="insta-item" data-src="Fotografía cuadrada de una pareja caminando de espaldas por un camino de campo al atardecer"></div>
-    <div class="insta-item" data-src="Fotografía cuadrada de una tarta de boda de tres pisos decorada con flores blancas"></div>
-    <div class="insta-item" data-src="Fotografía cuadrada de invitados aplaudiendo y sonriendo durante una ceremonia al aire libre"></div>
-    <div class="insta-item" data-src="Fotografía cuadrada de un ramo de novia con peonías rosas y eucalipto sobre fondo claro"></div>
-    <div class="insta-item" data-src="Fotografía cuadrada de una pista de baile iluminada con luces de neón durante una fiesta de boda nocturna"></div>
+    <div class="insta-item" data-src="anillos boda"></div>
+    <div class="insta-item" data-src="pareja campo"></div>
+    <div class="insta-item" data-src="tarta boda"></div>
+    <div class="insta-item" data-src="ceremonia"></div>
+    <div class="insta-item" data-src="ramo novia"></div>
+    <div class="insta-item" data-src="baile boda"></div>
   </div>
 </section>
 
@@ -369,22 +408,10 @@
         <div class="eyebrow" style="text-align:left;">Hablemos</div>
         <h3>¿Listos para contarnos vuestra historia?</h3>
         <p>Escribidnos y os responderemos en menos de 24 horas con disponibilidad y presupuesto personalizado.</p>
-        <div class="contact-item">
-          <span class="icon">📱</span>
-          <div><b>WhatsApp / Teléfono</b><span>+34 618 115 047</span></div>
-        </div>
-        <div class="contact-item">
-          <span class="icon">📧</span>
-          <div><b>Email</b><span>info@testigostudio.com</span></div>
-        </div>
-        <div class="contact-item">
-          <span class="icon">🌐</span>
-          <div><b>Web</b><span>www.testigostudio.com</span></div>
-        </div>
-        <div class="contact-item">
-          <span class="icon">📷</span>
-          <div><b>Instagram</b><span>@testigo_studio</span></div>
-        </div>
+        <div class="contact-item"><span class="icon">📱</span><div><b>WhatsApp / Teléfono</b><span>+34 618 115 047</span></div></div>
+        <div class="contact-item"><span class="icon">📧</span><div><b>Email</b><span>info@testigostudio.com</span></div></div>
+        <div class="contact-item"><span class="icon">🌐</span><div><b>Web</b><span>www.testigostudio.com</span></div></div>
+        <div class="contact-item"><span class="icon">📷</span><div><b>Instagram</b><span>@testigo_studio</span></div></div>
         <div class="social-row">
           <a href="https://instagram.com/testigo_studio" aria-label="Instagram" target="_blank">IG</a>
           <a href="#" aria-label="TikTok">TT</a>
@@ -392,14 +419,15 @@
         </div>
       </div>
       <div>
-        <!-- FORMULARIO DE CONTACTO — envía a info@testigostudio.com vía Formspree -->
-        <!-- INSTRUCCIONES PARA ACTIVAR EL ENVÍO DE EMAIL (3 pasos, gratis):
-             1. Ve a https://formspree.io → crea cuenta gratuita con info@testigostudio.com
-             2. Pulsa "New Form" → ponle nombre "testigo contacto" → copia la URL del endpoint
-             3. Sustituye "XXXXXXXXXXXXXXXXX" en la línea del fetch por ese ID
-             Una vez hecho, cada formulario llegará directamente a info@testigostudio.com -->
+        <!--
+          FORMULARIO — envía emails a info@testigostudio.com via Formspree (GRATIS)
+          ACTIVACIÓN EN 3 PASOS:
+          1. Ve a https://formspree.io → regístrate con info@testigostudio.com
+          2. Crea un nuevo formulario → copia el ID (ej: xpwzabcd)
+          3. Sustituye XXXXXXXXXXXXXXXXX por ese ID en la línea fetch de abajo
+        -->
         <form id="contact-form">
-          <input type="hidden" name="_subject" value="Nueva solicitud desde testigostudio.com">
+          <input type="hidden" name="_subject" value="Nueva solicitud — testigostudio.com">
           <div class="form-row">
             <input type="text" id="input-nombre" name="nombre" placeholder="Nombre" required>
             <input type="text" id="input-pareja" name="pareja" placeholder="Nombre de la pareja (opcional)">
@@ -420,7 +448,7 @@
           <textarea id="input-mensaje" name="mensaje" placeholder="Contadnos un poco sobre vuestro evento..."></textarea>
           <button type="submit" class="btn-submit">Enviar solicitud</button>
           <p class="form-msg" id="form-msg">¡Gracias! Hemos recibido vuestro mensaje y os responderemos muy pronto.</p>
-          <p class="form-err" id="form-err">Hubo un error al enviar. Por favor, inténtalo de nuevo o escríbenos directamente a info@testigostudio.com</p>
+          <p class="form-err" id="form-err">Error al enviar. Escríbenos a info@testigostudio.com</p>
         </form>
       </div>
     </div>
@@ -445,20 +473,15 @@
 <script>
   document.addEventListener('DOMContentLoaded', function() {
 
-    // --- MENÚ HAMBURGUESA ---
     var toggle = document.getElementById('menu-toggle');
     var nav = document.getElementById('main-nav');
-
     if (toggle && nav) {
       toggle.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
+        e.preventDefault(); e.stopPropagation();
         nav.classList.toggle('open');
       });
       nav.querySelectorAll('a').forEach(function(link) {
-        link.addEventListener('click', function() {
-          nav.classList.remove('open');
-        });
+        link.addEventListener('click', function() { nav.classList.remove('open'); });
       });
       document.addEventListener('click', function(e) {
         if (nav.classList.contains('open') && !nav.contains(e.target) && e.target !== toggle) {
@@ -467,54 +490,28 @@
       });
     }
 
-    // --- FORMULARIO DE CONTACTO — envío a Formspree ---
     var form = document.getElementById('contact-form');
-    var msg = document.getElementById('form-msg');
-    var err = document.getElementById('form-err');
-
+    var msg  = document.getElementById('form-msg');
+    var err  = document.getElementById('form-err');
     if (form) {
       form.addEventListener('submit', function(e) {
         e.preventDefault();
-
-        var submitBtn = form.querySelector('.btn-submit');
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Enviando...';
-        msg.style.display = 'none';
-        err.style.display = 'none';
-
-        // ⬇️ SUSTITUYE "XXXXXXXXXXXXXXXXX" POR TU ID DE FORMSPREE
+        var btn = form.querySelector('.btn-submit');
+        btn.disabled = true; btn.textContent = 'Enviando...';
+        msg.style.display = 'none'; err.style.display = 'none';
         fetch('https://formspree.io/f/mvkornyr', {
-          method: 'POST',
-          body: new FormData(form),
-          headers: { 'Accept': 'application/json' }
+          method:'POST', body: new FormData(form), headers:{'Accept':'application/json'}
         })
-        .then(function(response) {
-          if (response.ok) {
-            msg.style.display = 'block';
-            form.reset();
-          } else {
-            err.style.display = 'block';
-          }
-        })
-        .catch(function() {
-          err.style.display = 'block';
-        })
-        .finally(function() {
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Enviar solicitud';
-        });
+        .then(function(r){ r.ok ? (msg.style.display='block', form.reset()) : (err.style.display='block'); })
+        .catch(function(){ err.style.display='block'; })
+        .finally(function(){ btn.disabled=false; btn.textContent='Enviar solicitud'; });
       });
     }
 
-    // --- SMOOTH SCROLL ---
     document.querySelectorAll('a[href^="#"]').forEach(function(link) {
       link.addEventListener('click', function(e) {
-        var targetId = this.getAttribute('href');
-        var target = document.querySelector(targetId);
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth' });
-        }
+        var t = document.querySelector(this.getAttribute('href'));
+        if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
       });
     });
   });
@@ -522,59 +519,48 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-
-    var reviewsContainer = document.getElementById('reviews-container');
-    var showBtn = document.getElementById('show-review-form');
-    var formWrap = document.getElementById('review-form-wrap');
-    var reviewForm = document.getElementById('review-form');
+    var container = document.getElementById('reviews-container');
+    var showBtn   = document.getElementById('show-review-form');
+    var formWrap  = document.getElementById('review-form-wrap');
+    var reviewForm= document.getElementById('review-form');
 
     function renderReviews() {
       var reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
-      var noReviewsMsg = document.getElementById('no-reviews-msg');
-      reviewsContainer.innerHTML = '';
-      if (reviews.length > 0) {
-        if (noReviewsMsg) noReviewsMsg.style.display = 'none';
-      } else {
-        if (noReviewsMsg) noReviewsMsg.style.display = 'block';
-      }
+      var noMsg   = document.getElementById('no-reviews-msg');
+      container.innerHTML = '';
+      if (reviews.length > 0) { if(noMsg) noMsg.style.display='none'; }
+      else { if(noMsg) noMsg.style.display='block'; }
       reviews.forEach(function(r) {
-        var stars = '★'.repeat(parseInt(r.stars)) + '☆'.repeat(5 - parseInt(r.stars));
-        var card = document.createElement('div');
+        var stars = '★'.repeat(parseInt(r.stars)) + '☆'.repeat(5-parseInt(r.stars));
+        var card  = document.createElement('div');
         card.className = 'testi-card';
-        card.innerHTML =
-          '<div class="testi-stars">' + stars + '</div>' +
-          '<p>"' + r.text + '"</p>' +
-          '<div class="testi-author"><div><b>' + r.name + '</b><span>' + r.service + '</span></div></div>';
-        reviewsContainer.appendChild(card);
+        card.innerHTML = '<div class="testi-stars">'+stars+'</div><p>"'+r.text+'"</p><div class="testi-author"><div><b>'+r.name+'</b><span>'+r.service+'</span></div></div>';
+        container.appendChild(card);
       });
     }
 
     if (showBtn && formWrap) {
       showBtn.addEventListener('click', function() {
-        formWrap.style.display = formWrap.style.display === 'none' ? 'block' : 'none';
+        formWrap.style.display = formWrap.style.display==='none' ? 'block' : 'none';
       });
     }
-
     if (reviewForm) {
       reviewForm.addEventListener('submit', function(e) {
         e.preventDefault();
         var reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
         reviews.unshift({
-          name: document.getElementById('review-name').value,
+          name:    document.getElementById('review-name').value,
           service: document.getElementById('review-service').value || 'Cliente',
-          stars: document.getElementById('review-stars').value,
-          text: document.getElementById('review-text').value
+          stars:   document.getElementById('review-stars').value,
+          text:    document.getElementById('review-text').value
         });
         localStorage.setItem('reviews', JSON.stringify(reviews));
-        renderReviews();
-        reviewForm.reset();
-        formWrap.style.display = 'none';
+        renderReviews(); reviewForm.reset(); formWrap.style.display='none';
       });
     }
-
     renderReviews();
   });
 </script>
 
 </body>
-</html>    
+</html>
