@@ -1,4 +1,4 @@
-<html data-type="html" data-identifier="f4a92b71-3c58-4e89-b6d3-8e1f5a2c9d47" data-title="Testigo - Web Completa Final" data-version="1" imagemodel="stable-diffusion" videomodel="none">
+<html data-type="html" data-identifier="f4a92b71-3c58-4e89-b6d3-8e1f5a2c9d47" data-title="Testigo - Web Completa Final" data-version="2" imagemodel="stable-diffusion" videomodel="none">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,11 +35,7 @@
   }
 
   .hero { min-height:100vh; display:flex; align-items:center; position:relative; background:#0B1526; overflow:hidden; }
-  .hero-bg {
-    position:absolute; inset:0; background-size:cover; background-position:center;
-    background-image:url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1920&q=80');
-    opacity:.65;
-  }
+  .hero-bg { position:absolute; inset:0; background-size:cover; background-position:center; background-image:url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1920&q=80'); opacity:.65; }
   .hero-overlay { position:absolute; inset:0; background:linear-gradient(180deg, rgba(11,21,38,.25) 0%, rgba(11,21,38,.75) 100%); }
   .hero-content { position:relative; z-index:2; text-align:center; width:100%; padding:0 24px; }
   .hero-eyebrow { color:#D4C5B9; letter-spacing:4px; font-size:.8rem; text-transform:uppercase; margin-bottom:20px; }
@@ -50,7 +46,9 @@
   .btn-primary:hover { background:#D4C5B9; }
   .btn-outline { display:inline-block; border:1px solid #fff; color:#fff !important; padding:15px 36px; font-size:.85rem; letter-spacing:1.5px; text-transform:uppercase; border-radius:2px; white-space:nowrap; }
   .btn-outline:hover { background:#fff; color:#0B1526 !important; }
-  .scroll-hint { position:absolute; bottom:30px; left:50%; transform:translateX(-50%); color:#ccc; font-size:.75rem; letter-spacing:1px; z-index:2; }
+  /* scroll-hint ahora es un enlace */
+  .scroll-hint { position:absolute; bottom:30px; left:50%; transform:translateX(-50%); color:#ccc; font-size:.75rem; letter-spacing:1px; z-index:2; text-decoration:none; }
+  .scroll-hint:hover { color:#fff; }
 
   section { padding:110px 0; }
   .eyebrow { color:#B8935F; letter-spacing:3px; font-size:.8rem; text-transform:uppercase; text-align:center; margin-bottom:14px; }
@@ -60,7 +58,6 @@
   .dark-section .section-sub { color:#ccc; }
   .cream-section { background:#F5F1EC; }
 
-  /* SERVICIOS — iconos SVG */
   .services-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:#eee; }
   .service-card { background:#fff; padding:50px 40px; text-align:center; transition:.3s; }
   .service-card:hover { background:#0B1526; color:#fff; }
@@ -73,18 +70,22 @@
 
   .wc-wrap { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
   .wc-img { width:100%; height:480px; background-size:cover; background-position:center; border-radius:4px; }
-  .wc-tag { display:inline-block; background:#D4C5B9; color:#0B1526; padding:6px 16px; border-radius:20px; font-size:.75rem; letter-spacing:1px; text-transform:uppercase; margin-bottom:20px; font-weight:bold;}
+  .wc-tag { display:inline-block; background:#D4C5B9; color:#0B1526; padding:6px 16px; border-radius:20px; font-size:.75rem; letter-spacing:1px; text-transform:uppercase; margin-bottom:20px; font-weight:bold; }
   .wc-list { margin-top:24px; display:flex; flex-wrap:wrap; gap:10px; }
   .wc-list span { background:#F5F1EC; padding:8px 16px; border-radius:20px; font-size:.8rem; color:#0B1526; }
   @media(max-width:850px){ .wc-wrap{ grid-template-columns:1fr; } .wc-img{height:320px;} }
 
+  /* GALLERY — cursor pointer + efecto hover */
   .gallery-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
-  .gallery-item { height:280px; background-size:cover; background-position:center; border-radius:2px; position:relative; overflow:hidden; }
+  .gallery-item { height:280px; background-size:cover; background-position:center; border-radius:2px; position:relative; overflow:hidden; cursor:pointer; }
   .gallery-item.tall { grid-row:span 2; height:100%; }
-  .gallery-item:before { content:''; position:absolute; inset:0; background:rgba(0,0,0,0); transition:.3s; }
-  .gallery-item:hover:before { background:rgba(0,0,0,.15); }
+  .gallery-item::before { content:''; position:absolute; inset:0; background:rgba(0,0,0,0); transition:.3s; z-index:1; }
+  .gallery-item:hover::before { background:rgba(0,0,0,.25); }
+  .gallery-item::after { content:'⊕'; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); color:rgba(255,255,255,0); font-size:2.4rem; z-index:2; transition:color .3s; pointer-events:none; }
+  .gallery-item:hover::after { color:rgba(255,255,255,.85); }
   @media(max-width:850px){ .gallery-grid{ grid-template-columns:repeat(2,1fr); } .gallery-item.tall{grid-row:auto; height:280px;} }
 
+  /* PRECIOS — botones de pack como <button> */
   .pricing-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
   .price-card { border:1px solid #e5e0da; border-radius:4px; padding:40px 28px; text-align:center; background:#fff; position:relative; }
   .price-card.featured { border:2px solid #0B1526; transform:translateY(-10px); }
@@ -93,11 +94,26 @@
   .price-amount { font-size:2.4rem; margin:16px 0; font-family:'Georgia',serif; }
   .price-card ul { list-style:none; margin-top:20px; text-align:left; color:#6E6E6E; font-size:.88rem; line-height:2; }
   .price-card ul li:before { content:'— '; color:#B8935F; }
-  .price-card .btn-primary { background:#0B1526; color:#fff; margin-top:24px; width:100%; padding:14px; font-size:.8rem; }
-  .price-card.featured .btn-primary { background:#B8935F; color:#0B1526; }
+  .select-pack { display:block; width:100%; margin-top:24px; padding:14px; background:#0B1526; color:#fff; border:none; border-radius:2px; font-size:.8rem; letter-spacing:1.5px; text-transform:uppercase; cursor:pointer; font-family:'Helvetica Neue',Arial,sans-serif; transition:background .2s; }
+  .select-pack:hover { background:#B8935F; color:#0B1526; }
+  .price-card.featured .select-pack { background:#B8935F; color:#0B1526; }
+  .price-card.featured .select-pack:hover { background:#0B1526; color:#fff; }
   @media(max-width:900px){ .pricing-grid{ grid-template-columns:1fr 1fr; } .price-card.featured{ transform:none; } }
   @media(max-width:550px){ .pricing-grid{ grid-template-columns:1fr; } }
   .pricing-note { text-align:center; margin-top:40px; color:#999; font-size:.85rem; font-style:italic; }
+
+  /* LIGHTBOX */
+  #lb-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.93); z-index:9999; align-items:center; justify-content:center; }
+  #lb-overlay.active { display:flex; }
+  .lb-img { max-width:88vw; max-height:82vh; object-fit:contain; border-radius:2px; box-shadow:0 20px 60px rgba(0,0,0,.5); display:block; user-select:none; }
+  .lb-close { position:absolute; top:16px; right:22px; background:none; border:none; color:#fff; font-size:2.6rem; cursor:pointer; line-height:1; opacity:.7; padding:4px 10px; }
+  .lb-close:hover { opacity:1; }
+  .lb-prev, .lb-next { position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.25); color:#fff; font-size:2.4rem; cursor:pointer; padding:10px 18px; border-radius:2px; line-height:1; opacity:.8; transition:background .2s; }
+  .lb-prev { left:14px; }
+  .lb-next { right:14px; }
+  .lb-prev:hover, .lb-next:hover { background:rgba(255,255,255,.22); opacity:1; }
+  .lb-counter { position:absolute; bottom:18px; left:50%; transform:translateX(-50%); color:rgba(255,255,255,.55); font-size:.78rem; letter-spacing:2px; font-family:'Helvetica Neue',Arial,sans-serif; }
+  @media(max-width:600px){ .lb-prev{left:4px; padding:8px 12px;} .lb-next{right:4px; padding:8px 12px;} }
 
   .process-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:20px; }
   .process-step { text-align:center; }
@@ -170,9 +186,9 @@
     </div>
     <nav id="main-nav">
       <ul>
+        <li><a href="#portfolio">Portfolio</a></li>
         <li><a href="#servicios">Servicios</a></li>
         <li><a href="#wedding-content">Wedding Content</a></li>
-        <li><a href="#portfolio">Portfolio</a></li>
         <li><a href="#precios">Precios</a></li>
         <li><a href="#proceso">Cómo trabajamos</a></li>
         <li><a href="#opiniones">Opiniones</a></li>
@@ -195,11 +211,34 @@
       <a href="#portfolio" class="btn-outline">Ver portfolio</a>
     </div>
   </div>
-  <div class="scroll-hint">↓ DESCUBRE MÁS</div>
+  <!-- scroll-hint ahora lleva a #portfolio -->
+  <a href="#portfolio" class="scroll-hint">↓ DESCUBRE MÁS</a>
 </section>
 
-<!-- SERVICIOS CON ICONOS SVG PROFESIONALES -->
-<section id="servicios" class="cream-section">
+<!-- PORTFOLIO — ahora primero -->
+<section id="portfolio" class="cream-section">
+  <div class="container">
+    <div class="eyebrow">Nuestro trabajo</div>
+    <h2 class="section-title">Portfolio</h2>
+    <p class="section-sub">Una selección de nuestras sesiones y celebraciones favoritas. Haz clic en cualquier foto para verla en grande.</p>
+    <div class="gallery-grid">
+      <div class="gallery-item tall" style="background-image:url('https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=600&q=80'); background-position:center top;"></div>
+      <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80');"></div>
+      <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1529519195486-16945f0fb37f?auto=format&fit=crop&w=800&q=80');"></div>
+      <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1503315082045-a2bfb5e7f56e?auto=format&fit=crop&w=800&q=80');"></div>
+      <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80');"></div>
+      <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1520245840179-a7d310e02cb6?auto=format&fit=crop&w=800&q=80');"></div>
+      <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1508407576665-2d9a5d638a7e?auto=format&fit=crop&w=800&q=80');"></div>
+      <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?auto=format&fit=crop&w=800&q=80');"></div>
+    </div>
+    <div style="text-align:center; margin-top:50px;">
+      <a href="#contacto" class="btn-primary" style="background:#0B1526; color:#fff;">Ver más trabajos</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS — ahora segundo -->
+<section id="servicios">
   <div class="container">
     <div class="eyebrow">Qué hacemos</div>
     <h2 class="section-title">Nuestros servicios</h2>
@@ -270,7 +309,6 @@
   </div>
 </section>
 
-<!-- WEDDING CONTENT CON FOTO REAL A LA IZQUIERDA -->
 <section id="wedding-content">
   <div class="container">
     <div class="wc-wrap">
@@ -291,28 +329,7 @@
   </div>
 </section>
 
-<!-- PORTFOLIO CON FOTOS REALES DE BODAS -->
-<section id="portfolio" class="cream-section">
-  <div class="container">
-    <div class="eyebrow">Nuestro trabajo</div>
-    <h2 class="section-title">Portfolio</h2>
-    <p class="section-sub">Una selección de nuestras sesiones y celebraciones favoritas.</p>
-    <div class="gallery-grid">
-      <div class="gallery-item tall" style="background-image:url('https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=600&q=80'); background-position:center top;"></div>
-      <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80');"></div>
-      <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1529519195486-16945f0fb37f?auto=format&fit=crop&w=800&q=80');"></div>
-      <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1503315082045-a2bfb5e7f56e?auto=format&fit=crop&w=800&q=80');"></div>
-      <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80');"></div>
-      <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1520245840179-a7d310e02cb6?auto=format&fit=crop&w=800&q=80');"></div>
-      <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1508407576665-2d9a5d638a7e?auto=format&fit=crop&w=800&q=80');"></div>
-      
-    </div>
-    <div style="text-align:center; margin-top:50px;">
-      <a href="#contacto" class="btn-primary" style="background:#0B1526; color:#fff;">Ver más trabajos</a>
-    </div>
-  </div>
-</section>
-
+<!-- PRECIOS — botones cambiados a <button> con data-pack -->
 <section id="precios">
   <div class="container">
     <div class="eyebrow">Inversión</div>
@@ -323,26 +340,26 @@
         <h4>Essential</h4>
         <div class="price-amount">1.090€</div>
         <ul><li>6 horas de cobertura</li><li>1 fotógrafo</li><li>350 fotografías editadas</li><li>Galería online privada</li></ul>
-        <a href="#contacto" class="btn-primary">Elegir Essential</a>
+        <button type="button" class="select-pack" data-pack="Boda — Pack Essential (1.090€)">Elegir Essential</button>
       </div>
       <div class="price-card">
         <h4>Classic</h4>
         <div class="price-amount">1.490€</div>
         <ul><li>8 horas de cobertura</li><li>2 fotógrafos</li><li>500 fotografías editadas</li><li>Sesión preboda incluida</li><li>Galería online privada</li></ul>
-        <a href="#contacto" class="btn-primary">Elegir Classic</a>
+        <button type="button" class="select-pack" data-pack="Boda — Pack Classic (1.490€)">Elegir Classic</button>
       </div>
       <div class="price-card featured">
         <div class="price-badge">Más elegido</div>
         <h4>Premium</h4>
         <div class="price-amount">1.990€</div>
         <ul><li>10 horas de cobertura</li><li>2 fotógrafos</li><li>600 fotografías editadas</li><li>Sesión preboda incluida</li><li>Vídeo highlight</li></ul>
-        <a href="#contacto" class="btn-primary">Elegir Premium</a>
+        <button type="button" class="select-pack" data-pack="Boda — Pack Premium (1.990€)">Elegir Premium</button>
       </div>
       <div class="price-card">
         <h4>Full</h4>
         <div class="price-amount">2.590€</div>
         <ul><li>10-12 horas de cobertura</li><li>2 fotógrafos</li><li>Vídeo completo</li><li>Preboda y postboda</li><li>Álbum impreso incluido</li></ul>
-        <a href="#contacto" class="btn-primary">Elegir Full</a>
+        <button type="button" class="select-pack" data-pack="Boda — Pack Full (2.590€)">Elegir Full</button>
       </div>
     </div>
     <p class="pricing-note">También ofrecemos sesiones de retrato (desde 120€), pareja (desde 190€), comuniones y bautizos (desde 350€) y Wedding Content (desde 350€). Consultad disponibilidad y extras personalizados.</p>
@@ -419,13 +436,6 @@
         </div>
       </div>
       <div>
-        <!--
-          FORMULARIO — envía emails a info@testigostudio.com via Formspree (GRATIS)
-          ACTIVACIÓN EN 3 PASOS:
-          1. Ve a https://formspree.io → regístrate con info@testigostudio.com
-          2. Crea un nuevo formulario → copia el ID (ej: xpwzabcd)
-          3. Sustituye XXXXXXXXXXXXXXXXX por ese ID en la línea fetch de abajo
-        -->
         <form id="contact-form">
           <input type="hidden" name="_subject" value="Nueva solicitud — testigostudio.com">
           <div class="form-row">
@@ -436,11 +446,15 @@
             <input type="email" id="input-email" name="email" placeholder="Email" required>
             <input type="tel" id="input-telefono" name="telefono" placeholder="Teléfono">
           </div>
+          <!-- SELECT con opciones de packs incluidas -->
           <select id="input-servicio" name="servicio" required>
             <option value="">¿Qué servicio te interesa?</option>
             <option value="Retrato">Retrato</option>
             <option value="Pareja">Pareja</option>
-            <option value="Boda">Boda</option>
+            <option value="Boda — Pack Essential (1.090€)">Boda — Pack Essential (1.090€)</option>
+            <option value="Boda — Pack Classic (1.490€)">Boda — Pack Classic (1.490€)</option>
+            <option value="Boda — Pack Premium (1.990€)">Boda — Pack Premium (1.990€)</option>
+            <option value="Boda — Pack Full (2.590€)">Boda — Pack Full (2.590€)</option>
             <option value="Bautizo">Bautizo</option>
             <option value="Comunión">Comunión</option>
             <option value="Wedding Content">Wedding Content</option>
@@ -461,8 +475,8 @@
       <img src="logo-testigo.png" alt="testigo" class="logo-footer">
     </div>
     <div class="fnav">
-      <a href="#servicios">Servicios</a>
       <a href="#portfolio">Portfolio</a>
+      <a href="#servicios">Servicios</a>
       <a href="#precios">Precios</a>
       <a href="#contacto">Contacto</a>
     </div>
@@ -470,11 +484,21 @@
   </div>
 </footer>
 
+<!-- LIGHTBOX OVERLAY -->
+<div id="lb-overlay">
+  <button id="lb-close" class="lb-close" type="button" aria-label="Cerrar">×</button>
+  <button id="lb-prev"  class="lb-prev"  type="button" aria-label="Anterior">&#8249;</button>
+  <img id="lb-img" class="lb-img" src="" alt="Portfolio testigo">
+  <button id="lb-next"  class="lb-next"  type="button" aria-label="Siguiente">&#8250;</button>
+  <span id="lb-counter" class="lb-counter"></span>
+</div>
+
 <script>
   document.addEventListener('DOMContentLoaded', function() {
 
+    // --- MENÚ HAMBURGUESA ---
     var toggle = document.getElementById('menu-toggle');
-    var nav = document.getElementById('main-nav');
+    var nav    = document.getElementById('main-nav');
     if (toggle && nav) {
       toggle.addEventListener('click', function(e) {
         e.preventDefault(); e.stopPropagation();
@@ -490,6 +514,7 @@
       });
     }
 
+    // --- FORMULARIO CONTACTO ---
     var form = document.getElementById('contact-form');
     var msg  = document.getElementById('form-msg');
     var err  = document.getElementById('form-err');
@@ -508,21 +533,107 @@
       });
     }
 
+    // --- SMOOTH SCROLL ---
     document.querySelectorAll('a[href^="#"]').forEach(function(link) {
       link.addEventListener('click', function(e) {
         var t = document.querySelector(this.getAttribute('href'));
         if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
       });
     });
+
+    // --- LIGHTBOX ---
+    (function() {
+      var overlay  = document.getElementById('lb-overlay');
+      var imgEl    = document.getElementById('lb-img');
+      var counter  = document.getElementById('lb-counter');
+      var items    = document.querySelectorAll('.gallery-item');
+      var urls     = [];
+      var current  = 0;
+      var touchX   = 0;
+
+      // Recoger URLs de cada gallery-item
+      items.forEach(function(item, i) {
+        var bg  = item.style.backgroundImage || '';
+        var url = bg.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
+        urls.push(url);
+        item.addEventListener('click', function() { openLB(i); });
+      });
+
+      function openLB(i) {
+        current = i;
+        imgEl.src = urls[current];
+        counter.textContent = (current + 1) + ' / ' + urls.length;
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeLB() {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+      function prevImg() {
+        current = (current - 1 + urls.length) % urls.length;
+        imgEl.src = urls[current];
+        counter.textContent = (current + 1) + ' / ' + urls.length;
+      }
+      function nextImg() {
+        current = (current + 1) % urls.length;
+        imgEl.src = urls[current];
+        counter.textContent = (current + 1) + ' / ' + urls.length;
+      }
+
+      document.getElementById('lb-close').addEventListener('click', closeLB);
+      document.getElementById('lb-prev').addEventListener('click',  function(e){ e.stopPropagation(); prevImg(); });
+      document.getElementById('lb-next').addEventListener('click',  function(e){ e.stopPropagation(); nextImg(); });
+      overlay.addEventListener('click', function(e){ if(e.target === overlay) closeLB(); });
+
+      // Teclado
+      document.addEventListener('keydown', function(e) {
+        if (!overlay.classList.contains('active')) return;
+        if (e.key === 'Escape')     closeLB();
+        if (e.key === 'ArrowLeft')  prevImg();
+        if (e.key === 'ArrowRight') nextImg();
+      });
+
+      // Swipe táctil
+      overlay.addEventListener('touchstart', function(e){ touchX = e.changedTouches[0].screenX; }, {passive:true});
+      overlay.addEventListener('touchend', function(e){
+        var diff = touchX - e.changedTouches[0].screenX;
+        if (Math.abs(diff) > 50) { diff > 0 ? nextImg() : prevImg(); }
+      }, {passive:true});
+    })();
+
+    // --- PACK BUTTONS → FORMULARIO ---
+    (function() {
+      document.querySelectorAll('.select-pack').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var pack     = this.getAttribute('data-pack');
+          var select   = document.getElementById('input-servicio');
+          var contacto = document.getElementById('contacto');
+          if (select) { select.value = pack; }
+          if (contacto) {
+            contacto.scrollIntoView({ behavior: 'smooth' });
+            setTimeout(function() {
+              var s = document.getElementById('input-servicio');
+              if (s) {
+                s.style.boxShadow = '0 0 0 2px #B8935F';
+                s.focus();
+                setTimeout(function(){ s.style.boxShadow = ''; }, 2000);
+              }
+            }, 700);
+          }
+        });
+      });
+    })();
+
   });
 </script>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    var container = document.getElementById('reviews-container');
-    var showBtn   = document.getElementById('show-review-form');
-    var formWrap  = document.getElementById('review-form-wrap');
-    var reviewForm= document.getElementById('review-form');
+    var container  = document.getElementById('reviews-container');
+    var showBtn    = document.getElementById('show-review-form');
+    var formWrap   = document.getElementById('review-form-wrap');
+    var reviewForm = document.getElementById('review-form');
 
     function renderReviews() {
       var reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
