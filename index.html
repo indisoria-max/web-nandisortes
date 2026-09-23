@@ -77,14 +77,14 @@
 
   /* GALLERY — cursor pointer + efecto hover */
   .gallery-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
-  .gallery-item { height:280px; background-size:cover; background-position:center; border-radius:2px; position:relative; overflow:hidden; cursor:pointer; }
+  .gallery-item { aspect-ratio:3/2; background-size:cover; background-position:50% 20%; border-radius:2px; position:relative; overflow:hidden; cursor:pointer; }
   .gallery-item.tall { grid-row:span 2; height:100%; }
   .gallery-item::before { content:''; position:absolute; inset:0; background:rgba(0,0,0,0); transition:.3s; z-index:1; }
   .gallery-item:hover::before { background:rgba(0,0,0,.25); }
   .gallery-item::after { content:'⊕'; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); color:rgba(255,255,255,0); font-size:2.4rem; z-index:2; transition:color .3s; pointer-events:none; }
   .gallery-item:hover::after { color:rgba(255,255,255,.85); }
-@media(max-width:850px){ .gallery-grid{ grid-template-columns:repeat(2,1fr); } .gallery-item{ height:auto; aspect-ratio:4/3; } .gallery-item.tall{ grid-row:auto; height:auto; aspect-ratio:4/3; } }
-  /* PRECIOS — botones de pack como <button> */
+@media(max-width:850px){ .gallery-grid{ grid-template-columns:repeat(2,1fr); } .gallery-item.tall{grid-row:auto; aspect-ratio:3/2; height:auto;} }
+ /* PRECIOS — botones de pack como <button> */
   .pricing-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
   .price-card { border:1px solid #e5e0da; border-radius:4px; padding:40px 28px; text-align:center; background:#fff; position:relative; }
   .price-card.featured { border:2px solid #0B1526; transform:translateY(-10px); }
@@ -171,8 +171,8 @@
     section { padding: 70px 0; }
     .section-title { font-size: 1.9rem; }
  .gallery-grid { grid-template-columns: 1fr; }
-.gallery-item { height: auto; aspect-ratio: 4/3; }
-.gallery-item.tall { height: auto; aspect-ratio: 4/3; }
+  .gallery-item { aspect-ratio:3/2; background-position:50% 20%; }
+  .gallery-item.tall { aspect-ratio:3/2; height:auto; }
     .-header { height: 34px; }
   }
 </style>
