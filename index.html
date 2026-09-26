@@ -122,13 +122,24 @@
   .process-step p { color:#ccc; font-size:.82rem; }
   @media(max-width:900px){ .process-grid{ grid-template-columns:repeat(2,1fr); gap:40px; } }
 
-  .testi-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:30px; }
-  .testi-card { background:#fff; padding:36px 30px; border-radius:4px; box-shadow:0 4px 20px rgba(0,0,0,.04); }
-  .testi-stars { color:#B8935F; margin-bottom:16px; font-size:1rem; }
-  .testi-card p { color:#555; font-size:.92rem; line-height:1.7; font-style:italic; margin-bottom:20px; }
-  .testi-author b { font-size:.88rem; display:block; }
-  .testi-author span { font-size:.75rem; color:#999; }
-  @media(max-width:850px){ .testi-grid{ grid-template-columns:1fr; } }
+/* CAROUSEL RESEÑAS */
+.testi-carousel-outer { position:relative; padding:0 54px; }
+.testi-carousel-viewport { overflow:hidden; }
+.testi-carousel-track { display:flex; transition:transform .45s cubic-bezier(.4,0,.2,1); }
+.testi-card { flex:0 0 calc(33.333% - 20px); margin:0 10px; background:#fff; padding:36px 30px; border-radius:4px; box-shadow:0 4px 20px rgba(0,0,0,.06); flex-shrink:0; }
+.testi-stars { color:#B8935F; margin-bottom:16px; font-size:1rem; }
+.testi-card p { color:#555; font-size:.92rem; line-height:1.7; font-style:italic; margin-bottom:20px; }
+.testi-author b { font-size:.88rem; display:block; }
+.testi-author span { font-size:.75rem; color:#999; }
+.testi-btn { position:absolute; top:50%; transform:translateY(-50%); background:#0B1526; color:#fff; border:none; width:46px; height:46px; border-radius:50%; font-size:1.9rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .2s; z-index:2; line-height:1; }
+.testi-btn:hover { background:#B8935F; }
+.testi-btn-prev { left:0; }
+.testi-btn-next { right:0; }
+.testi-dots { display:flex; justify-content:center; gap:8px; margin-top:28px; }
+.testi-dot { width:9px; height:9px; border-radius:50%; background:#ccc; border:none; cursor:pointer; padding:0; transition:all .25s; }
+.testi-dot.active { background:#B8935F; width:24px; border-radius:5px; }
+@media(max-width:850px){ .testi-card{ flex:0 0 calc(50% - 20px); } .testi-carousel-outer{ padding:0 46px; } }
+@media(max-width:550px){ .testi-card{ flex:0 0 calc(100% - 16px); margin:0 8px; } .testi-carousel-outer{ padding:0 40px; } }
 
   .insta-strip { display:grid; grid-template-columns:repeat(6,1fr); gap:2px; }
   .insta-item { height:160px; background-size:cover; background-position:center; }
@@ -417,7 +428,14 @@
     <div class="eyebrow">Lo que dicen de nosotros</div>
     <h2 class="section-title">Opiniones</h2>
     <p class="section-sub" id="no-reviews-msg">Aún no tenemos reseñas publicadas. ¡Sé el primero en compartir tu experiencia!</p>
-    <div id="reviews-container" class="testi-grid"></div>
+    <div id="carousel-outer" class="testi-carousel-outer" style="display:none;">
+  <button class="testi-btn testi-btn-prev" id="testi-prev" type="button" aria-label="Anterior">&#8249;</button>
+  <div class="testi-carousel-viewport">
+    <div class="testi-carousel-track" id="reviews-container"></div>
+  </div>
+  <button class="testi-btn testi-btn-next" id="testi-next" type="button" aria-label="Siguiente">&#8250;</button>
+</div>
+<div class="testi-dots" id="testi-dots"></div>
     <div style="max-width:600px; margin:50px auto 0; text-align:center;">
       <button id="show-review-form" type="button" class="btn-primary" style="background:#0B1526; color:#fff; border:none; cursor:pointer;">Escribir una reseña</button>
     </div>
@@ -659,65 +677,128 @@
   });
 </script>
 
-<script>
+<<script>
   document.addEventListener('DOMContentLoaded', function() {
 
-    // ── RESEÑAS — Google Sheets ──────────────────────────────────────
- var APPS_URL  = 'https://script.google.com/macros/s/AKfycbzszuCLSXZlgqt43CYi3LouU6ulTichsE9hV7lx2alB3sv5u9Sjrees4hmXIt8eh8Shlg/exec';
-    var container  = document.getElementById('reviews-container');
+    var APPS_URL = 'https://script.google.com/macros/s/AKfycbzszuCLSXZlgqt43CYi3LouU6ulTichsE9hV7lx2alB3sv5u9Sjrees4hmXIt8eh8Shlg/exec';
+
     var showBtn    = document.getElementById('show-review-form');
     var formWrap   = document.getElementById('review-form-wrap');
     var reviewForm = document.getElementById('review-form');
 
-    function escHtml(s) {
-      return String(s)
-        .replace(/&/g,'&amp;').replace(/</g,'&lt;')
-        .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    // ── CAROUSEL ────────────────────────────────────────────
+    var currentIdx   = 0;
+    var totalCards   = 0;
+    var autoTimer    = null;
+
+    function getVisible() {
+      if (window.innerWidth <= 550) return 1;
+      if (window.innerWidth <= 850) return 2;
+      return 3;
     }
+    function getMaxIdx() { return Math.max(0, totalCards - getVisible()); }
+
+    function goTo(idx) {
+      var track = document.getElementById('reviews-container');
+      if (!track || !track.children[0]) return;
+      currentIdx = Math.max(0, Math.min(idx, getMaxIdx()));
+      var card  = track.children[0];
+      var cs    = window.getComputedStyle(card);
+      var slotW = card.offsetWidth + parseFloat(cs.marginLeft) + parseFloat(cs.marginRight);
+      track.style.transform = 'translateX(-' + (currentIdx * slotW) + 'px)';
+      document.querySelectorAll('.testi-dot').forEach(function(d, i) {
+        d.classList.toggle('active', i === currentIdx);
+      });
+      var p = document.getElementById('testi-prev');
+      var n = document.getElementById('testi-next');
+      if (p) p.style.opacity = currentIdx === 0 ? '.3' : '1';
+      if (n) n.style.opacity = currentIdx >= getMaxIdx() ? '.3' : '1';
+    }
+
+    function stopAuto() { if (autoTimer) clearInterval(autoTimer); autoTimer = null; }
+    function startAuto() {
+      stopAuto();
+      if (totalCards <= getVisible()) return;
+      autoTimer = setInterval(function() {
+        goTo(currentIdx >= getMaxIdx() ? 0 : currentIdx + 1);
+      }, 5000);
+    }
+
+    function buildDots() {
+      var el = document.getElementById('testi-dots');
+      if (!el) return;
+      el.innerHTML = '';
+      if (totalCards <= getVisible()) return;
+      for (var i = 0; i <= getMaxIdx(); i++) {
+        var d = document.createElement('button');
+        d.type = 'button';
+        d.className = 'testi-dot' + (i === 0 ? ' active' : '');
+        (function(ix) {
+          d.onclick = function() { goTo(ix); stopAuto(); startAuto(); };
+        })(i);
+        el.appendChild(d);
+      }
+    }
+
+    function initCarousel() {
+      var outer = document.getElementById('carousel-outer');
+      var p     = document.getElementById('testi-prev');
+      var n     = document.getElementById('testi-next');
+      if (outer) outer.style.display = 'block';
+      var needNav = totalCards > getVisible();
+      if (p) { p.style.display = needNav ? '' : 'none'; p.onclick = function() { goTo(currentIdx - 1); stopAuto(); startAuto(); }; }
+      if (n) { n.style.display = needNav ? '' : 'none'; n.onclick = function() { goTo(currentIdx + 1); stopAuto(); startAuto(); }; }
+      buildDots();
+      goTo(0);
+      startAuto();
+    }
+
+    window.addEventListener('resize', function() { buildDots(); goTo(Math.min(currentIdx, getMaxIdx())); });
+
+    // ── RENDER ──────────────────────────────────────────────
+    function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
     function renderResenas(resenas) {
       var noMsg = document.getElementById('no-reviews-msg');
-      container.innerHTML = '';
+      var track = document.getElementById('reviews-container');
+      track.innerHTML = '';
       if (resenas.length > 0) {
         if (noMsg) noMsg.style.display = 'none';
+        totalCards = resenas.length;
         resenas.forEach(function(r) {
-          var n     = Math.min(5, Math.max(1, parseInt(r.estrellas) || 5));
-          var stars = '★'.repeat(n) + '☆'.repeat(5 - n);
-          var card  = document.createElement('div');
+          var n = parseInt(r.estrellas) || 5;
+          var card = document.createElement('div');
           card.className = 'testi-card';
-          card.innerHTML  = '<div class="testi-stars">' + stars + '</div>'
-                          + '<p>"' + escHtml(r.texto) + '"</p>'
-                          + '<div class="testi-author">'
-                          + '<b>' + escHtml(r.nombre)   + '</b>'
-                          + '<span>' + escHtml(r.servicio) + '</span>'
-                          + '</div>';
-          container.appendChild(card);
+          card.innerHTML = '<div class="testi-stars">' + '★'.repeat(n) + '☆'.repeat(5 - n) + '</div>'
+                         + '<p>"' + esc(r.texto) + '"</p>'
+                         + '<div class="testi-author"><b>' + esc(r.nombre) + '</b><span>' + esc(r.servicio) + '</span></div>';
+          track.appendChild(card);
         });
+        setTimeout(initCarousel, 50);
       } else {
         if (noMsg) noMsg.style.display = 'block';
       }
     }
 
-    function cargarResenas() {
-      fetch(APPS_URL + '?t=' + Date.now())
-        .then(function(r) { return r.json(); })
-        .then(function(data) { renderResenas(Array.isArray(data) ? data : []); })
-        .catch(function()    { renderResenas([]); });
-    }
+    // ── CARGAR RESEÑAS ───────────────────────────────────────
+    fetch(APPS_URL + '?t=' + Date.now())
+      .then(function(r) { return r.json(); })
+      .then(function(d) { renderResenas(Array.isArray(d) ? d : []); })
+      .catch(function() { renderResenas([]); });
 
+    // ── MOSTRAR FORMULARIO ───────────────────────────────────
     if (showBtn && formWrap) {
       showBtn.addEventListener('click', function() {
         formWrap.style.display = formWrap.style.display === 'none' ? 'block' : 'none';
       });
     }
 
+    // ── ENVIAR RESEÑA ────────────────────────────────────────
     if (reviewForm) {
       reviewForm.addEventListener('submit', function(e) {
         e.preventDefault();
         var btn = reviewForm.querySelector('.btn-submit');
-        btn.disabled    = true;
-        btn.textContent = 'Enviando…';
-
+        btn.disabled = true; btn.textContent = 'Enviando…';
         var params = new URLSearchParams({
           action:    'submit',
           nombre:    document.getElementById('review-name').value.trim(),
@@ -725,27 +806,21 @@
           estrellas: document.getElementById('review-stars').value,
           texto:     document.getElementById('review-text').value.trim()
         });
-
         fetch(APPS_URL + '?' + params.toString())
           .then(function(r) { return r.json(); })
           .then(function(res) {
             if (res.ok) {
               reviewForm.reset();
-              var okMsg = document.getElementById('review-ok-msg');
-              if (okMsg) okMsg.style.display = 'block';
+              formWrap.style.display = 'none';
+              var ok = document.getElementById('review-ok-msg');
+              if (ok) ok.style.display = 'block';
             }
           })
-          .catch(function() {
-            alert('Error al enviar. Por favor, inténtalo de nuevo.');
-          })
-          .finally(function() {
-            btn.disabled    = false;
-            btn.textContent = 'Publicar reseña';
-          });
+          .catch(function() { alert('Error al enviar. Inténtalo de nuevo.'); })
+          .finally(function() { btn.disabled = false; btn.textContent = 'Publicar reseña'; });
       });
     }
 
-    cargarResenas();
   });
 </script>
 
