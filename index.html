@@ -434,6 +434,7 @@
         <textarea id="review-text" placeholder="Cuéntanos tu experiencia..." required style="background:#F5F1EC; border:1px solid #ddd; color:#0B1526; padding:12px 14px; border-radius:4px; font-size:.9rem; min-height:100px; resize:vertical;"></textarea>
         <button type="submit" class="btn-submit" style="background:#B8935F; color:#0B1526;">Publicar reseña</button>
       </form>
+     <p id="review-ok-msg" style="display:none; text-align:center; color:#B8935F; margin-top:18px; font-size:.95rem; font-family:Georgia,serif;">¡Gracias por tu reseña! Tu opinión nos ayuda a crecer. 🙏</p>
     </div>
   </div>
 </section>
@@ -660,46 +661,91 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+
+    // ── RESEÑAS — Google Sheets ──────────────────────────────────────
+ var APPS_URL  = 'https://script.google.com/macros/s/AKfycbzszuCLSXZlgqt43CYi3LouU6ulTichsE9hV7lx2alB3sv5u9Sjrees4hmXIt8eh8Shlg/exec';
     var container  = document.getElementById('reviews-container');
     var showBtn    = document.getElementById('show-review-form');
     var formWrap   = document.getElementById('review-form-wrap');
     var reviewForm = document.getElementById('review-form');
 
-    function renderReviews() {
-      var reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
-      var noMsg   = document.getElementById('no-reviews-msg');
+    function escHtml(s) {
+      return String(s)
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    function renderResenas(resenas) {
+      var noMsg = document.getElementById('no-reviews-msg');
       container.innerHTML = '';
-      if (reviews.length > 0) { if(noMsg) noMsg.style.display='none'; }
-      else { if(noMsg) noMsg.style.display='block'; }
-      reviews.forEach(function(r) {
-        var stars = '★'.repeat(parseInt(r.stars)) + '☆'.repeat(5-parseInt(r.stars));
-        var card  = document.createElement('div');
-        card.className = 'testi-card';
-        card.innerHTML = '<div class="testi-stars">'+stars+'</div><p>"'+r.text+'"</p><div class="testi-author"><div><b>'+r.name+'</b><span>'+r.service+'</span></div></div>';
-        container.appendChild(card);
-      });
+      if (resenas.length > 0) {
+        if (noMsg) noMsg.style.display = 'none';
+        resenas.forEach(function(r) {
+          var n     = Math.min(5, Math.max(1, parseInt(r.estrellas) || 5));
+          var stars = '★'.repeat(n) + '☆'.repeat(5 - n);
+          var card  = document.createElement('div');
+          card.className = 'testi-card';
+          card.innerHTML  = '<div class="testi-stars">' + stars + '</div>'
+                          + '<p>"' + escHtml(r.texto) + '"</p>'
+                          + '<div class="testi-author">'
+                          + '<b>' + escHtml(r.nombre)   + '</b>'
+                          + '<span>' + escHtml(r.servicio) + '</span>'
+                          + '</div>';
+          container.appendChild(card);
+        });
+      } else {
+        if (noMsg) noMsg.style.display = 'block';
+      }
+    }
+
+    function cargarResenas() {
+      fetch(APPS_URL + '?t=' + Date.now())
+        .then(function(r) { return r.json(); })
+        .then(function(data) { renderResenas(Array.isArray(data) ? data : []); })
+        .catch(function()    { renderResenas([]); });
     }
 
     if (showBtn && formWrap) {
       showBtn.addEventListener('click', function() {
-        formWrap.style.display = formWrap.style.display==='none' ? 'block' : 'none';
+        formWrap.style.display = formWrap.style.display === 'none' ? 'block' : 'none';
       });
     }
+
     if (reviewForm) {
       reviewForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        var reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
-        reviews.unshift({
-          name:    document.getElementById('review-name').value,
-          service: document.getElementById('review-service').value || 'Cliente',
-          stars:   document.getElementById('review-stars').value,
-          text:    document.getElementById('review-text').value
+        var btn = reviewForm.querySelector('.btn-submit');
+        btn.disabled    = true;
+        btn.textContent = 'Enviando…';
+
+        var params = new URLSearchParams({
+          action:    'submit',
+          nombre:    document.getElementById('review-name').value.trim(),
+          servicio:  document.getElementById('review-service').value.trim() || 'Cliente',
+          estrellas: document.getElementById('review-stars').value,
+          texto:     document.getElementById('review-text').value.trim()
         });
-        localStorage.setItem('reviews', JSON.stringify(reviews));
-        renderReviews(); reviewForm.reset(); formWrap.style.display='none';
+
+        fetch(APPS_URL + '?' + params.toString())
+          .then(function(r) { return r.json(); })
+          .then(function(res) {
+            if (res.ok) {
+              reviewForm.reset();
+              var okMsg = document.getElementById('review-ok-msg');
+              if (okMsg) okMsg.style.display = 'block';
+            }
+          })
+          .catch(function() {
+            alert('Error al enviar. Por favor, inténtalo de nuevo.');
+          })
+          .finally(function() {
+            btn.disabled    = false;
+            btn.textContent = 'Publicar reseña';
+          });
       });
     }
-    renderReviews();
+
+    cargarResenas();
   });
 </script>
 
